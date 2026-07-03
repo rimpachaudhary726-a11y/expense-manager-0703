@@ -1,0 +1,326 @@
+/* style.css - Dark Themed Responsive UI for Expense Manager */
+
+/* ==========================
+   Root Variables
+   ========================== */
+:root {
+  --color-bg: #121212;
+  --color-surface: #1e1e1e;
+  --color-primary: #0d6efd;
+  --color-primary-dark: #0b5ed7;
+  --color-accent: #ffc107;
+  --color-success: #28a745;
+  --color-warning: #ff9800;
+  --color-danger: #dc3545;
+  --color-text: #e0e0e0;
+  --color-muted: #b0b0b0;
+  --color-border: #2c2c2c;
+  --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --radius: 8px;
+  --transition: 0.25s ease;
+}
+
+/* ==========================
+   Global Reset & Base
+   ========================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================
+   Layout Containers
+   ========================== */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* ==========================
+   Header / Navigation
+   ========================== */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+header h1 {
+  font-size: 2.2rem;
+  color: var(--color-primary);
+}
+
+/* ==========================
+   Forms
+   ========================== */
+form {
+  background: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: grid;
+  gap: 1rem;
+}
+form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+form label {
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+form input,
+form select,
+form textarea {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: #1a1a1a;
+}
+form button {
+  align-self: start;
+  padding: 0.6rem 1.2rem;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+form button:hover {
+  background: var(--color-primary-dark);
+}
+
+/* ==========================
+   Cards (Totals & Stats)
+   ========================== */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
+}
+.card p {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ==========================
+   Dashboard Table
+   ========================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+thead {
+  background: var(--color-primary);
+  color: #fff;
+}
+thead th {
+  padding: 0.8rem;
+  text-align: left;
+}
+tbody tr:nth-child(even) {
+  background: #1b1b1b;
+}
+tbody td {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--color-border);
+}
+tbody tr:hover {
+  background: #262626;
+}
+
+/* ==========================
+   Filters Section
+   ========================== */
+.filter-bar {
+  background: var(--color-surface);
+  padding: 1rem;
+  border-radius: var(--radius);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.filter-bar label {
+  margin-right: 0.4rem;
+  color: var(--color-muted);
+}
+.filter-bar input,
+.filter-bar select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: var(--transition);
+}
+.filter-bar input:focus,
+.filter-bar select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+.filter-bar button {
+  padding: 0.5rem 1rem;
+  background: var(--color-success);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.filter-bar button:hover {
+  background: #218838;
+}
+
+/* ==========================
+   Responsive Layout
+   ========================== */
+@media (max-width: 768px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filter-bar button {
+    width: 100%;
+  }
+  header h1 {
+    font-size: 1.8rem;
+  }
+  .card h2 {
+    font-size: 1.4rem;
+  }
+  .card p {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  .container {
+    width: 95%;
+    margin: 1rem auto;
+  }
+  table thead,
+  table tbody,
+  table tr,
+  table th,
+  table td {
+    display: block;
+  }
+  thead {
+    display: none;
+  }
+  tbody tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+  tbody td {
+    padding: 0.6rem;
+    border: none;
+    position: relative;
+  }
+  tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0.8rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+}
+
+/* ==========================
+   Utility Classes
+   ========================== */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 1rem; }
+.hidden { display: none !important; }
+
+/* ==========================
+   Loading & Error States
+   ========================== */
+.loader,
+.error-message {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.loader::after {
+  content: "Loading…";
+  font-size: 1.2rem;
+}
+.error-message {
+  background: rgba(255,0,0,0.85);
+  color: #fff;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+}
+.error-message button {
+  margin-top: 1rem;
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.error-message button:hover {
+  background: #e0e0e0;
+}
