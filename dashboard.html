@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Manager - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Global error handling for external resources
+        function handleExternalError(src, message) {
+            const loading = document.getElementById('loading');
+            const errorBox = document.getElementById('error-message');
+            if (loading) loading.style.display = 'none';
+            if (errorBox) {
+                errorBox.textContent = `Failed to load ${src}: ${message}`;
+                errorBox.style.display = 'block';
+            }
+        }
+        // Attach to window error to catch script load failures
+        window.addEventListener('error', function (e) {
+            if (e.target.tagName === 'SCRIPT' && e.target.src) {
+                e.preventDefault();
+                handleExternalError(e.target.src, e.message || 'Unknown error');
+            }
+        }, true);
+    </script>
+    <!-- Chart.js for visual breakdown -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div id="loading">Loading resources, please wait...</div>
+    <div id="error-message" style="display:none;color:#ff6b6b;margin:1rem;"></div>
+
+    <header class="app-header">
+        <h1>Expense Dashboard</h1>
+        <nav>
+            <a href="index.html">Add Expense</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+        </nav>
+    </header>
+
+    <main class="dashboard-main">
+        <section class="total-section">
+            <h2>Total Expenses</h2>
+            <p class="total-amount" id="totalAmount">$0.00</p>
+        </section>
+
+        <section class="breakdown-section">
+            <h2>Expenses by Category</h2>
+            <canvas id="categoryChart" aria-label="Category breakdown chart" role="img"></canvas>
+        </section>
+
+        <section class="filter-section">
+            <h2>Filter Expenses</h2>
+            <form id="filterForm">
+                <label for="filterCategory">Category:</label>
+                <select id="filterCategory" name="category">
+                    <option value="">All</option>
+                    <option value="Food">Food</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Bills">Bills</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="filterStartDate">From:</label>
+                <input type="date" id="filterStartDate" name="startDate">
+
+                <label for="filterEndDate">To:</label>
+                <input type="date" id="filterEndDate" name="endDate">
+
+                <button type="submit">Apply Filter</button>
+                <button type="button" id="clearFilterBtn">Clear</button>
+            </form>
+        </section>
+
+        <section class="list-section">
+            <h2>Expense List</h2>
+            <table id="expensesTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be injected by script.js -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Expense Manager</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script>
+        // After DOM & external scripts loaded, hide loading indicator and initialise dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            const loading = document.getElementById('loading');
+            if (loading) loading.style.display = 'none';
+            if (typeof initDashboard === 'function') {
+                initDashboard();
+            }
+        });
+    </script>
+</body>
+</html>
