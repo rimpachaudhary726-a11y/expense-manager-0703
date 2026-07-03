@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Manager – Add Expense</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Optional font (error‑handled) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet"
+        onerror="handleExternalError(event, 'Failed to load Google Fonts')">
+  <style>
+    /* Fallback font styling while the Google Font loads */
+    body { font-family: Arial, Helvetica, sans-serif; }
+  </style>
+
+  <script>
+    // Global error handling for external resources
+    function handleExternalError(e, message) {
+      const loading = document.getElementById('loading');
+      if (loading) loading.textContent = message;
+    }
+
+    // Show a loading indicator until the main script is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      const loading = document.createElement('div');
+      loading.id = 'loading';
+      loading.textContent = 'Loading...';
+      loading.style.position = 'fixed';
+      loading.style.top = '0';
+      loading.style.left = '0';
+      loading.style.right = '0';
+      loading.style.background = '#111';
+      loading.style.color = '#fff';
+      loading.style.padding = '0.5rem';
+      loading.style.textAlign = 'center';
+      loading.style.zIndex = '1000';
+      document.body.appendChild(loading);
+    });
+  </script>
+</head>
+<body>
+  <nav class="top-nav">
+    <h1>Expense Manager</h1>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+  </nav>
+
+  <main class="container">
+    <section class="form-section">
+      <h2>Add New Expense</h2>
+      <form id="expense-form" autocomplete="off">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" name="description" required placeholder="e.g., Grocery shopping">
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Amount ($)</label>
+          <input type="number" id="amount" name="amount" required min="0.01" step="0.01" placeholder="0.00">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" name="category" required>
+            <option value="">Select…</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Bills">Bills</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+
+        <button type="submit" class="btn-primary">Add Expense</button>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <h2>Recent Expenses</h2>
+      <table id="expenses-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Amount ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Populated by script.js -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Expense Manager</p>
+  </footer>
+
+  <!-- Main application script with error handling -->
+  <script defer src="script.js"
+          onerror="handleExternalError(event, 'Failed to load script.js')"></script>
+
+  <script>
+    // Hide loading indicator once the page and script are ready
+    window.addEventListener('load', () => {
+      const loading = document.getElementById('loading');
+      if (loading) loading.remove();
+    });
+  </script>
+</body>
+</html>
